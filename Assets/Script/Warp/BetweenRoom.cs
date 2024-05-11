@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BetweenRoom : Warp
 {
@@ -17,5 +18,6 @@ public class BetweenRoom : Warp
     protected override void WarpingTO(IWarpTo warpto)
     {
         warpto.WarpTo(_warpTo.GetChild(0));
+        _room.ChangeRoom(_warpTo.parent);
     }
 }

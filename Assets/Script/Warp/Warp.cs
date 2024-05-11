@@ -14,9 +14,17 @@ public abstract
     [field: SerializeField]
     public string keyitem { get; protected set; }
 
+    protected Room _room;
+
+    private void Awake()
+    {
+        _room = transform.parent.GetComponent<Room>();
+    }
+
     protected virtual void WarpingTO(IWarpTo warpto)
     {
         warpto.WarpTo(_warpTo);
+        _room.ChangeRoom(_warpTo.parent);
     }
 
     protected WarpStatus GetOtherPoint()
