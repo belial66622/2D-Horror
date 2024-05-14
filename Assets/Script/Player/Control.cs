@@ -40,6 +40,17 @@ public class Control : MonoBehaviour
         
     }
 
+
+    public void StopMovement()
+    { 
+        playerinput.InGame.Move.Disable();
+    }
+
+    public void StartMovement()
+    {
+        playerinput.InGame.Move.Enable();
+    }
+
     private void Interact_performed(InputAction.CallbackContext obj)
     {
 

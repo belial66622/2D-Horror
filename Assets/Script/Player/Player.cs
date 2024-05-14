@@ -97,6 +97,16 @@ public class Player : MonoBehaviour , IWarpTo
 
     #region Main
 
+    public void StopMovement()
+    { 
+        gameInput.StopMovement();
+    }
+
+    public void StartMovement()
+    { 
+        gameInput.StartMovement();
+    }
+
     public void CheckCollider()
     {
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
