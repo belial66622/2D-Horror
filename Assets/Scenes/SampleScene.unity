@@ -405,7 +405,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.61552286, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -971,9 +971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 299007776}
+  warp: {fileID: 0}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 0}
 --- !u!61 &142271538
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1360,7 +1361,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.454902, g: 0.26666668, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1563,6 +1564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRoom: 0
+  <RoomName>k__BackingField: 
 --- !u!1 &299007775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,9 +1663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 142271535}
+  warp: {fileID: 0}
   <status>k__BackingField: 1
   <keyitem>k__BackingField: Bulat
+  <Location>k__BackingField: {fileID: 0}
 --- !u!61 &299007779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1815,9 +1818,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4817aaefcd4358439ec8bd3057aa0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 1182481719}
+  warp: {fileID: 1182481723}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 44605820}
 --- !u!1 &449851018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,9 +1980,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4817aaefcd4358439ec8bd3057aa0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 1320893600}
+  warp: {fileID: 1320893604}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 1387381882}
 --- !u!61 &471762506
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2472,7 +2477,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.454902, g: 0.26666668, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4052,6 +4057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRoom: 1
+  <RoomName>k__BackingField: 
 --- !u!1 &1111361349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,7 +4215,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.8089566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4344,9 +4350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4817aaefcd4358439ec8bd3057aa0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 365349792}
+  warp: {fileID: 365349796}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 242445073}
 --- !u!1 &1182973434
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,9 +4479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4817aaefcd4358439ec8bd3057aa0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 2095727093}
+  warp: {fileID: 2095727097}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 1151998200}
 --- !u!1 &1213514684
 GameObject:
   m_ObjectHideFlags: 3
@@ -4819,6 +4827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRoom: 0
+  <RoomName>k__BackingField: 
 --- !u!1 &1320893599
 GameObject:
   m_ObjectHideFlags: 0
@@ -4944,9 +4953,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4817aaefcd4358439ec8bd3057aa0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 471762504}
+  warp: {fileID: 471762505}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 203662993}
 --- !u!1 &1355702938
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,7 +5207,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5368,9 +5378,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 2098623796}
+  warp: {fileID: 2098623799}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 0}
 --- !u!1 &1513293409
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,6 +5435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRoom: 0
+  <RoomName>k__BackingField: 
 --- !u!1 &1538076699
 GameObject:
   m_ObjectHideFlags: 0
@@ -6786,6 +6798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRoom: 0
+  <RoomName>k__BackingField: 
 --- !u!1 &1794269328
 GameObject:
   m_ObjectHideFlags: 0
@@ -6950,6 +6963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultRoom: 0
+  <RoomName>k__BackingField: 
 --- !u!1 &1856618664
 GameObject:
   m_ObjectHideFlags: 0
@@ -7052,7 +7066,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.454902, g: 0.26666668, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7297,9 +7311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 1911944018}
+  warp: {fileID: 1911944022}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 0}
 --- !u!1 &1896265011
 GameObject:
   m_ObjectHideFlags: 0
@@ -7643,9 +7658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 1884355085}
+  warp: {fileID: 1884355089}
   <status>k__BackingField: 2
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 0}
 --- !u!1 &2015956646
 GameObject:
   m_ObjectHideFlags: 0
@@ -8077,9 +8093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4817aaefcd4358439ec8bd3057aa0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 1182973435}
+  warp: {fileID: 1182973439}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 1448296959}
 --- !u!1 &2098623795
 GameObject:
   m_ObjectHideFlags: 0
@@ -8204,6 +8221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warpTo: {fileID: 1489125290}
+  warp: {fileID: 1489125293}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
+  <Location>k__BackingField: {fileID: 0}
