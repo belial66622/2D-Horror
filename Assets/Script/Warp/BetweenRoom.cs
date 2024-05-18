@@ -6,6 +6,12 @@ using UnityEngine.Rendering.Universal;
 public class BetweenRoom : Warp
 {
 
+    protected override void Awake()
+    {
+        _room = transform.parent.GetComponent<Room>();
+        GetComponentInParent<Room>().AddWarpLocation(this);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.TryGetComponent<IWarpTo>(out IWarpTo warpto))
@@ -15,9 +21,4 @@ public class BetweenRoom : Warp
         Debug.Log("ditabrak");
     }
 
-    protected override void WarpingTO(IWarpTo warpto)
-    {
-        warpto.WarpTo(_warpTo.GetChild(0));
-        _room.ChangeRoom(_warpTo.parent);
-    }
 }

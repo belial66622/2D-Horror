@@ -6,7 +6,7 @@ public abstract
     class Warp : MonoBehaviour, IWarpable
 {
     [SerializeField]
-    protected Transform _warpTo;
+    private Warp warp;
 
     [field: SerializeField]
     public WarpStatus status { get; protected set; }
@@ -14,24 +14,29 @@ public abstract
     [field: SerializeField]
     public string keyitem { get; protected set; }
 
-    protected Room _room;
+    public Room _room{get; protected set;}
 
-    private void Awake()
+    [field:SerializeField]
+    public Transform Location { get; protected set;}
+
+    protected virtual void Awake()
     {
+        Location= transform;
         _room = transform.parent.GetComponent<Room>();
+        GetComponentInParent<Room>().AddWarpLocation(this);
     }
 
     protected virtual void WarpingTO(IWarpTo warpto)
     {
-        warpto.WarpTo(_warpTo);
-        _room.ChangeRoom(_warpTo.parent);
+        warpto.WarpTo(warp);
+        _room.ChangeRoom(warp.transform.parent);
     }
 
     protected WarpStatus GetOtherPoint()
     {
         WarpStatus OtherPointStatus;
 
-        OtherPointStatus = _warpTo.GetComponent<IWarpable>().status;
+        OtherPointStatus = warp.GetComponent<IWarpable>().status;
 
         return OtherPointStatus;
     }

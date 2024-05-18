@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IWarpTo
 {
-    public void WarpTo(Transform warpToPosition);
+    public void WarpTo(Warp warpToPosition);
 }

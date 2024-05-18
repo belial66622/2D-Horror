@@ -8,6 +8,12 @@ public class Room : MonoBehaviour
     [SerializeField]
     private bool defaultRoom = false;
 
+    private List <Warp> _warpLocation = new List<Warp>();
+
+    [field: SerializeField]
+    public string RoomName { get; private set; }
+
+
     private void Awake()
     {
         _manager= GetComponentInParent<RoomManager>();
@@ -15,6 +21,7 @@ public class Room : MonoBehaviour
         {
             _manager.RoomDisable(transform);
         }
+        _manager.AddRoom(this);
     }
     // Start is called before the first frame update
     void Start()
@@ -31,5 +38,16 @@ public class Room : MonoBehaviour
     public void ChangeRoom(Transform nextRoom)
     {
         _manager.RoomDisable(transform, nextRoom);
-    }    
+    }
+
+    public void AddWarpLocation(Warp location)
+    {
+        _warpLocation.Add(location);
+    }
+
+
+    public List<Warp>getWarpToOther()
+    {
+        return _warpLocation ;
+    }
 }

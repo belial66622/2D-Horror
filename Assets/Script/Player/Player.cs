@@ -257,10 +257,10 @@ public class Player : MonoBehaviour , IWarpTo
 
     #region IWarpTo
 
-    public void WarpTo(Transform warpToPosition)
+    public void WarpTo(Warp warpToPosition)
     {
         
-        transform.position= warpToPosition.position;
+        transform.position= warpToPosition.Location.position;
     }
 
 

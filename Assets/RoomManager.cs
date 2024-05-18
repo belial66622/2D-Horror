@@ -5,6 +5,8 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
 
+    private List<Room> roomList = new ();
+
     /// <summary>
     /// Menghilangkan renderer
     /// </summary>
@@ -44,5 +46,25 @@ public class RoomManager : MonoBehaviour
                 image.enabled = true;
             }
         }
+    }
+
+    public void AddRoom(Room room)
+    {
+        roomList.Add(room);
+    }
+
+    public Warp GetRoom(string location)
+    {
+        List<Warp> warplist = new();
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            if (location == roomList[i].RoomName)
+            {
+                warplist = roomList[i].getWarpToOther();
+                break;
+            }
+        }
+
+        return warplist[Random.Range(0, warplist.Count)];
     }
 }
