@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class HideSpot : MonoBehaviour , IInteractable
 {
-
+    [SerializeField]
     Transform _player;
+    private void Start()
+    {
+        _player = GameManager.Instance.getPlayer();
+    }
 
     public void CancelInteraction()
     {
@@ -13,8 +17,8 @@ public class HideSpot : MonoBehaviour , IInteractable
 
     public void interaction(object obj = null)
     {
-        _player = (Transform)obj;
-        _player.SetParent(transform);
+        _player.GetComponent<SpriteRenderer>().sortingLayerName = "Hide";
+        _player.transform.position= new Vector3 (transform.position.x, _player.transform.position.y);
         if (_player.TryGetComponent<IHide>(out IHide hide))
         {
             if (!hide.IsHiding)
@@ -24,6 +28,8 @@ public class HideSpot : MonoBehaviour , IInteractable
             else
             { 
                 hide.Unhide();
+
+                _player.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
             }
         }
     }

@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private Transform player;
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +35,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-    public void WarpingCharacter(Transform To, Transform obj)
+    public Transform getPlayer()
     {
-        
+        return player;
     }
 }

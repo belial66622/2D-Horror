@@ -29,6 +29,7 @@ public abstract
     protected virtual void WarpingTO(IWarpTo warpto)
     {
         warpto.WarpTo(warp);
+        if(warpto.IsPlayer)
         _room.ChangeRoom(warp.transform.parent);
     }
 

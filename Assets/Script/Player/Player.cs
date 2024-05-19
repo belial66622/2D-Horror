@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour , IWarpTo
 {
+    Interact interact;
+
     #region Variable
     private Control gameInput;
 
@@ -43,6 +45,8 @@ public class Player : MonoBehaviour , IWarpTo
 
     private bool addStamina = false;
 
+    public bool IsPlayer => true;
+
     #endregion
 
     #region MonoBehaviour
@@ -56,17 +60,18 @@ public class Player : MonoBehaviour , IWarpTo
         gameInput.Onrun_performed += GameInput_OnrunAction;
         gameInput.Onrun_canceled += GameInput_OnrunActioncanceled;
         stamina = maxStamina;
+        interact = new (_collider,this,transform);
     }
 
 
     private void GameInput_OninteractAction(object sender, System.EventArgs e)
     {
-        CheckCollider();
+        interact.CheckCollider();
     }
 
     private void GameInput_OninteractActioncanceled(object sender, System.EventArgs e)
     {
-        CancelInteraction();
+        interact.CancelInteraction();
     }
 
     private void GameInput_OnrunAction(object sender, System.EventArgs e)
@@ -107,80 +112,7 @@ public class Player : MonoBehaviour , IWarpTo
         gameInput.StartMovement();
     }
 
-    public void CheckCollider()
-    {
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        List<Collider2D> results = new List<Collider2D>();
-        if (_collider.OverlapCollider(filter, results) > 0)
-        {
-            foreach (Collider2D col in results)
-            {
-                if (col.TryGetComponent<IInteractable>(out IInteractable interact))
-                {
-                    interaction = interact;
-                    interact.interaction(transform);
-                    StartCoroutine("CheckColliderEverytick");
-                    break;
-                }
-            }
-        }
-    }
-
-
-    IEnumerator CheckColliderEverytick()
-    {
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        List<Collider2D> results = new List<Collider2D>();
-        bool onReachItem = true;
-
-        while (onReachItem)
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (_collider.OverlapCollider(filter, results) > 0)
-            {
-                bool stillOnReach = false;
-                foreach (Collider2D col in results)
-                {
-                    if (col.TryGetComponent<IInteractable>(out IInteractable interact))
-                    {
-                        if (interaction == interact)
-                        {
-                            stillOnReach= true;
-                            break;
-                        }
-
-                    }
-
-                }
-                if (!stillOnReach)
-                {
-                    onReachItem = false;
-                }
-            }
-        }
-
-        interaction.CancelInteraction();
-        interaction = null;
-        yield break;
-    }
-
-    public void CancelInteraction()
-    {
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        List<Collider2D> results = new List<Collider2D>();
-        if (_collider.OverlapCollider(filter, results) > 0)
-        {
-            foreach (Collider2D col in results)
-            {
-                if (col.TryGetComponent<IInteractable>(out IInteractable interact))
-                {
-                    interact.CancelInteraction();
-                    StopCoroutine("CheckColliderEverytick");
-                    break;
-                }
-            }
-        }
-    }
+   
     private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalize();
@@ -221,6 +153,7 @@ public class Player : MonoBehaviour , IWarpTo
         {
             transform.right = moveDir;
         }
+
     }
 
     void DelayStamina()

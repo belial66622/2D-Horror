@@ -6,14 +6,23 @@ public class Health : MonoBehaviour, IHealth
 {
     public float CurrentHealth { get; private set; }
 
-    public float MaxHealth { get; private set; } = 100;
+    public float MaxHealth { get; private set; } = 10;
 
+    private bool isdead = false;
     public virtual void ChangeHealth(float amount)
     {
-       CurrentHealth= amount;
+        if (isdead) return;
+
+        if (CurrentHealth <= 0)
+        {
+            Debug.Log("ded");
+            isdead = !isdead;
+        }
+        CurrentHealth -= amount;
+        Debug.Log(CurrentHealth);
     }
 
-    public int GetHealth()
+    public virtual int GetHealth()
     {
         return (int)CurrentHealth;
     }

@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IWarpTo
 {
     public void WarpTo(Warp warpToPosition);
+
+    bool IsPlayer { get; }
 }

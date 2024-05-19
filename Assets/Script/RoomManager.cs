@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-
+    [SerializeField]
     private List<Room> roomList = new ();
 
     /// <summary>
