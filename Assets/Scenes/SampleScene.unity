@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warp: {fileID: 0}
+  warp: {fileID: 299007778}
   <status>k__BackingField: 0
   <keyitem>k__BackingField: 
   <Location>k__BackingField: {fileID: 0}
@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6495a54aef8b7e4dbeb6a286af2738f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warp: {fileID: 0}
+  warp: {fileID: 142271537}
   <status>k__BackingField: 1
   <keyitem>k__BackingField: Bulat
   <Location>k__BackingField: {fileID: 0}
@@ -2426,7 +2426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.35, y: 1.9699999, z: -10}
+  m_LocalPosition: {x: 13.73, y: 1.9699999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4091,7 +4091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891678066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.35, y: 1.9699999, z: -10}
+  m_LocalPosition: {x: 13.73, y: 1.9699999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4134,7 +4134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sightLocation: {fileID: 986689800}
   _radius: 9
-  _angle: 169
+  _angle: 360
   _playerPos: {x: 0, y: 0, z: 0}
   _playerRef: {fileID: 1726424899}
   _targetMask:
@@ -7270,7 +7270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726424899}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.35, y: -0.07, z: 0}
+  m_LocalPosition: {x: 13.73, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 2.8926, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
