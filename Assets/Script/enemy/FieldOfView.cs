@@ -82,8 +82,9 @@ protected virtual void FieldOfViewCheck()
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - _sightLocation.position).normalized;
+            var angel = Vector3.Angle(transform.right, directionToTarget);
 
-            if (Vector3.Angle(transform.right, directionToTarget) < _angle / 2)
+            if (Vector3.Angle(transform.right, directionToTarget) <= _angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(_sightLocation.position, target.position);
                 if (!Physics.Raycast(_sightLocation.position, directionToTarget, distanceToTarget, _obstructionMask))

@@ -9,15 +9,15 @@ using UnityEngine.AI;
 [SelectionBase]
 public class Ghost : MonoBehaviour, IWarpTo
 {
-    private Interact interact;
+    public Interact interact { get; private set; }
+
+    [SerializeField]
+    private RoomManager roommanager;
 
     private StateMachine _stateMachine;
 
-    Vector3 _playerPosition, _lastPosition;
-
-    public Vector3 LastPosition => _lastPosition;
-
-    public Vector3 PlayerPosition => _playerPosition;
+    Vector3 _playerPosition;
+    public Vector3 _lastPosition { get; private set; }
 
     bool _canSeePlayer;
 
@@ -29,6 +29,8 @@ public class Ghost : MonoBehaviour, IWarpTo
 
     [SerializeField] LayerMask layer;
 
+    [SerializeField] LayerMask roomLayer; 
+
     public bool isFaceright { get; private set; } = true;
 
     public FieldOfView fieldOfView => _fieldofview;
@@ -38,8 +40,10 @@ public class Ghost : MonoBehaviour, IWarpTo
     public bool _moveroom { get; private set; }
 
     public bool _search{get; private set;}
-    
-    
+
+    public Warp warp{get; private set;}
+
+
     private void Awake()
     {
         interact = new Interact(GetComponent<Collider2D>(),this,transform);
@@ -52,20 +56,20 @@ public class Ghost : MonoBehaviour, IWarpTo
 
 
        var patrol = new GhostPatrolState(this, animator, _speed, transform, layer,isFaceright);
-        var search = new GhostSearchState(this, animator, _searchTime, navMeshAgent);
-        var chase = new GhostChaseState(this, animator, navMeshAgent, audioSource);
+        var search = new GhostSearchState(this, animator, _speed);
+        var chase = new GhostChaseState(this, animator, _speed, transform, _player.transform);
         var moveroom = new GhostMoveRoomState(this, animator, _speed, transform, layer, isFaceright);
 
 
         At(patrol, chase, HasTarget());
         At(patrol, moveroom, MoveRoom());
         At(moveroom, patrol, BackToPatrol());
+        At(moveroom, chase, HasTarget());
 
 
         At(chase, search, HasNoTarget());
-        At(search, patrol, HasNoTargetSearch());
-        At(search, chase, HasTargetSearch());
-
+        At(search, chase, HasTarget());
+        At(search, patrol, PatrolSearch());
 
         _stateMachine.SetState(patrol);
 
@@ -73,10 +77,9 @@ public class Ghost : MonoBehaviour, IWarpTo
 
         Func<bool> HasTarget() => () => _canSeePlayer;
         Func<bool> HasNoTarget() => () => !_canSeePlayer;
-        Func<bool> HasNoTargetSearch() => () => !_canSeePlayer && search.Patrol == true;
-        Func<bool> HasTargetSearch() => () => _canSeePlayer && search.Chase == true;
         Func<bool> MoveRoom() => () => _moveroom;
         Func<bool> BackToPatrol() => () => !_moveroom;
+        Func<bool> PatrolSearch() => () => !_canSeePlayer && _search&& !_moveroom;
     }
 
     public void IsFaceRight(bool face)
@@ -88,7 +91,6 @@ public class Ghost : MonoBehaviour, IWarpTo
     {
         fieldOfView.PlayerPos += SeePlayer;
     }
-
 
     private void Update() => _stateMachine.Tick();
 
@@ -106,7 +108,7 @@ public class Ghost : MonoBehaviour, IWarpTo
         }
 
         _canSeePlayer = canSeePlayer;
-        _lastPosition = PlayerPosition;
+        _lastPosition = _playerPosition;
     }
 
 
@@ -120,6 +122,18 @@ public class Ghost : MonoBehaviour, IWarpTo
 
         transform.position = warpToPosition.Location.position;
         _moveroom = false;
-        _search = false;
     }
+
+    public void search(bool condition)
+    { 
+    _search= condition;
+    }
+
+    public void GetLocation()
+    {
+        var Collider = Physics2D.CircleCast(transform.position ,1f, transform.right, 1f,roomLayer);
+
+        warp = roommanager.GetRoom(Collider.transform.parent.GetComponent<Room>().RoomName);
+    }
+
 }

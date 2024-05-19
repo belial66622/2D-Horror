@@ -17,14 +17,14 @@ public class Door : Warp, IInteractable
 
         if (status == WarpStatus.Locked)
         {
-            if (keyitem == KeyItem(character))
+            if (KeyItem(character) == keyitem)
             {
                 status = WarpStatus.Open;
 
                 EventContainer.Instance.DialogueEvent("Kunci dipakai sudah dibuka");
             }
 
-            else if (keyitem == AIPass)
+            else if (KeyItem(character) == AIPass)
             {
 
                 if (character.TryGetComponent<IWarpTo>(out IWarpTo warpto))
@@ -41,7 +41,7 @@ public class Door : Warp, IInteractable
         else if (GetOtherPoint() == WarpStatus.Barricade)
         {
 
-            if (keyitem == AIPass)
+            if (KeyItem(character) == AIPass)
             {
 
                 if (character.TryGetComponent<IWarpTo>(out IWarpTo warpto))
@@ -58,7 +58,7 @@ public class Door : Warp, IInteractable
 
         else if (status == WarpStatus.Barricade)
         {
-            if (keyitem == AIPass)
+            if (KeyItem(character) == AIPass)
             {
 
                 if (character.TryGetComponent<IWarpTo>(out IWarpTo warpto))

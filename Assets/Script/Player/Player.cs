@@ -131,12 +131,10 @@ public class Player : MonoBehaviour , IWarpTo
             _delayStamina = true;
             addStamina = false; 
             _delayStaminaCount = delayStaminaDefaultCount;
-            Debug.Log("run");
         }
         else
         {
             movedistance = Time.deltaTime * _speed;
-            Debug.Log("jalan");
         }
 
         float playerHeight = 1.0f;

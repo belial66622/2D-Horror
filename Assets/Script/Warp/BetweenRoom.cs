@@ -18,7 +18,6 @@ public class BetweenRoom : Warp
         {
             WarpingTO(warpto);
         }
-        Debug.Log("ditabrak");
     }
 
 }

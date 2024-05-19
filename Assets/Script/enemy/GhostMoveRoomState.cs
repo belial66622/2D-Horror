@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,33 +35,35 @@ public class GhostMoveRoomState : IState
 
     public void Tick()
     {
+
         HandleMovement();
+        Debug.Log("roomstate");
     }
 
     private void HandleMovement()
     {
+
         Vector2 inputVector = _transform.right;
 
-        if (inputVector == Vector2.zero) return;
+        if (Vector2.Distance(_ghost.warp.transform.position, _transform.position) < 1f)
+        {
+            _ghost.interact.CheckCollider();
+        }
 
-        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
+        if (_ghost.warp.transform.position.x >= _transform.position.x)
+        {
+           inputVector = _transform.right;
+        }
 
         float movedistance;
 
-            movedistance = Time.deltaTime * _speed;
+        movedistance = Time.deltaTime * _speed;
 
+        _transform.position = Vector3.MoveTowards(_transform.position, _ghost.warp.transform.position, movedistance);
+            _transform.right = new Vector3( _ghost.warp.transform.position.x - _transform.position.x, inputVector.y, 0f ); ;
 
-        float playerHeight = 2.0f;
-//        bool canMove = !Physics2D.Raycast(_transform.position, _transform.right, 1.1f, _layer);
-
-            _transform.position += moveDir * movedistance;
-            _transform.right = moveDir;
 
     }
 
-    void flip()
-    { 
-
-    }
 
 }

@@ -28,7 +28,6 @@ public class GhostPatrolState : IState
 
     public void OnEnter()
     {
-        patroltime = patroltimedefault;
         _speed = _maxSpeed;
         patrol = _ghost.StartCoroutine(Count());
     }
@@ -36,11 +35,14 @@ public class GhostPatrolState : IState
     public void OnExit()
     {
         _ghost.StopCoroutine(patrol);
+        _ghost.GetLocation();
+        _ghost.search(false);
     }
 
     public void Tick()
     {
         HandleMovement();
+        Debug.Log("patrol");
     }
 
     private void HandleMovement()
@@ -56,7 +58,6 @@ public class GhostPatrolState : IState
             movedistance = Time.deltaTime * _speed;
 
 
-        float playerHeight = 2.0f;
         bool canMove = !Physics2D.Raycast(_transform.position, _transform.right, 1.1f, _layer);
 
         if (canMove)
@@ -75,13 +76,10 @@ public class GhostPatrolState : IState
 
     }
 
-    void flip()
-    { 
-
-    }
 
     IEnumerator Count()
     {
+        patroltime = patroltimedefault;
         while (patroltime >0)
         {
             yield return null;

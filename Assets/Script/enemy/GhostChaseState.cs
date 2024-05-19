@@ -3,46 +3,81 @@ using UnityEngine.AI;
 
 public class GhostChaseState : IState
 {
+    private readonly LayerMask _layer;
     private readonly Ghost _ghost;
-    private readonly Vector3 _playerPos;
     private readonly Animator _animator;
-    private readonly NavMeshAgent _navMeshAgent;
-    private readonly AudioSource _audioSource;
-    float _checkCondition, _checkConditionDefault= 0.3f;
+    private readonly Transform _transform;
+    private readonly Transform _player;
+    private int _wayPointPos;
+    float _speed, _maxSpeed;
+    bool _isFaceRignt;
 
-    public GhostChaseState(Ghost ghost, Animator animator, NavMeshAgent navMeshAgent, AudioSource audioSource)
-    { 
-        _ghost= ghost;
-        _animator= animator;
-        _navMeshAgent = navMeshAgent;
-        _audioSource = audioSource;
+    public GhostChaseState(Ghost ghost, Animator animator, float maxspeed, Transform transform, Transform player)
+    {
+        _ghost = ghost;
+        _animator = animator;
+        _maxSpeed = maxspeed;
+        _transform = transform;
+        _player = player;
     }
-
     public void Tick()
     {
+       HandleMovement();
+
         Debug.Log("chase");
-        _checkCondition -= Time.deltaTime;
-        if (_checkCondition <= 0)
-        { 
-            _navMeshAgent.SetDestination(_ghost.PlayerPosition);
-            _checkCondition = _checkConditionDefault;
-            Debug.Log(_playerPos);
-        }
     }
+
+
+    private void HandleMovement()
+    {
+
+        Vector2 inputVector = _transform.right;
+
+
+
+        if (_ghost.warp.transform.position.x >= _transform.position.x)
+        {
+            inputVector = _transform.right;
+        }
+
+        float movedistance;
+
+        movedistance = Time.deltaTime * _speed*2;
+
+        if (_isFaceRignt)
+        {
+            _transform.position = Vector3.MoveTowards(_transform.position, _player.transform.position + Vector3.left, movedistance);
+            if (Vector3.Distance(_transform.position, _player.transform.position + Vector3.left) < .7f)
+            {
+                _isFaceRignt = !_isFaceRignt;
+            }
+            _transform.right = new Vector3(_player.transform.position.x + Vector3.left.x - _transform.position.x, inputVector.y, 0f); ;
+
+        }
+        else
+        {
+            _transform.position = Vector3.MoveTowards(_transform.position, _player.transform.position + Vector3.right, movedistance);
+            if (Vector3.Distance(_transform.position, _player.transform.position + Vector3.right) < .7f)
+            {
+                _isFaceRignt = !_isFaceRignt;
+            }
+
+            _transform.right = new Vector3(_player.transform.position.x + Vector3.right.x - _transform.position.x, inputVector.y, 0f); ;
+        }
+
+
+
+    }
+
 
     public void OnEnter()
     {
+        _speed = _maxSpeed;
         _ghost.fieldOfView.fullradius();
-        _navMeshAgent.speed = 2.5f;
-        _animator.SetFloat("Speed", 1);
-        _navMeshAgent.enabled= true;
-        _checkCondition= _checkConditionDefault;
     }
 
     public void OnExit()
     {
-        _navMeshAgent.enabled = false;
-
         _ghost.fieldOfView.PatrolRadius();
     }
 }

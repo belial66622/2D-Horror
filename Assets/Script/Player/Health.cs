@@ -19,7 +19,6 @@ public class Health : MonoBehaviour, IHealth
             isdead = !isdead;
         }
         CurrentHealth -= amount;
-        Debug.Log(CurrentHealth);
     }
 
     public virtual int GetHealth()

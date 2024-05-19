@@ -39,7 +39,6 @@ public class Damage : MonoBehaviour
             if (hp == health)
             {
                 damagestart = false;
-                Debug.Log("stop");
                 StopAllCoroutines();
             }
 
