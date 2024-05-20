@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideSpot : MonoBehaviour , IInteractable
+public class HideSpot : MonoBehaviour , IInteractable , ISearchObejctAI
 {
     [SerializeField]
     Transform _player;
+
+    public Transform position => transform;
+
     private void Start()
     {
         _player = GameManager.Instance.getPlayer();

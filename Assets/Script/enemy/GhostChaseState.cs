@@ -74,10 +74,13 @@ public class GhostChaseState : IState
     {
         _speed = _maxSpeed;
         _ghost.fieldOfView.fullradius();
+        GameManager.Instance.Chased(2);
     }
 
     public void OnExit()
     {
         _ghost.fieldOfView.PatrolRadius();
+
+        GameManager.Instance.Chased(1);
     }
 }

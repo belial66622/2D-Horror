@@ -30,7 +30,7 @@ public class GhostMoveRoomState : IState
 
     public void OnExit()
     {
-
+        _ghost.setMoveRoom(false);
     }
 
     public void Tick()

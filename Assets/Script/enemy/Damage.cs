@@ -25,9 +25,16 @@ public class Damage : MonoBehaviour
     {
         if (collision.TryGetComponent<IHealth>(out IHealth health))
         {
-            damagestart = true;
-            Debug.Log("damage");
-            StartCoroutine(TakeHealth(health));
+            if (collision.TryGetComponent<IHide>(out IHide hide))
+            {
+                if (!hide.IsHiding)
+                {
+                    damagestart = true;
+                    Debug.Log("damage");
+                    StartCoroutine(TakeHealth(health));
+
+                }
+            }
         }
     }
 

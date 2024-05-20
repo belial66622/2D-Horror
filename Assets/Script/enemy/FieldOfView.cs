@@ -89,8 +89,21 @@ protected virtual void FieldOfViewCheck()
                 float distanceToTarget = Vector3.Distance(_sightLocation.position, target.position);
                 if (!Physics.Raycast(_sightLocation.position, directionToTarget, distanceToTarget, _obstructionMask))
                 {
-                    _canSeePlayer = true;
-                    PlayerPos?.Invoke(target.position, _canSeePlayer);
+                    if (target.TryGetComponent<IHide>(out IHide hide))
+                    {
+                        if (hide.IsHiding == true)
+                        {
+
+                            _canSeePlayer = false;
+                            PlayerPos?.Invoke(target.position, _canSeePlayer);
+                        }
+
+                        else
+                        {
+                            _canSeePlayer = true;
+                            PlayerPos?.Invoke(target.position, _canSeePlayer);
+                        }
+                    }
 
                 }
                 else

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,11 +9,14 @@ public class GhostSearchState : IState
     private readonly float _searchTime;
     private readonly Ghost _ghost;
     private readonly Animator _animator;
-    private readonly Vector3 _lastposition;
+    private Vector3 _lastposition;
     private float _speed;
     bool _isFaceRignt;
 
-    public GhostSearchState(Ghost ghost, Animator animator, float speed)
+    Coroutine _search;
+    Collider2D _check;
+
+    public GhostSearchState(Ghost ghost, Animator animator, float speed )
     {
         _ghost = ghost;
         _animator = animator;
@@ -22,15 +26,19 @@ public class GhostSearchState : IState
 
     public void OnEnter()
     {
-        _ghost.search(true);
+        _ghost.Search(true);
         _ghost.setMoveRoom(true);
-        IsFaceRight();
+
+        _check = Physics2D.OverlapCircle(_ghost._lastPosition, 4f,_ghost.DoorLocation);
     }
 
     public void OnExit()
     {
-
+        if(_ghost== null)
+        _ghost.StopCoroutine(_search);
     }
+
+
     public void Tick()
     {
 
@@ -40,10 +48,22 @@ public class GhostSearchState : IState
 
     private void HandleMovement()
     {
-
-
-        if (Vector2.Distance(_ghost._lastPosition, _ghost.transform.position) < .1f)
+        if(_check == null)
         {
+            _lastposition = _ghost._lastPosition;
+        }
+        else if (_check.TryGetComponent<ISearchObejctAI>(out ISearchObejctAI warp))
+            {
+                _lastposition = warp.position.position;
+            }
+
+
+
+
+        if (Vector2.Distance(_lastposition, _ghost.transform.position) < 1f)
+        {
+            if(_search== null)
+            _search = _ghost.StartCoroutine(Search());
             _ghost.interact.CheckCollider();
         }
 
@@ -51,29 +71,23 @@ public class GhostSearchState : IState
 
         movedistance = Time.deltaTime * _speed;
 
-        if (_isFaceRignt)
-            _ghost.transform.position = Vector3.MoveTowards(_ghost.transform.position, _ghost._lastPosition + Vector3.right*2, movedistance);
-        else
-        {
-            _ghost.transform.position = Vector3.MoveTowards(_ghost.transform.position, _ghost._lastPosition + Vector3.left *2, movedistance);
-        }
-        _ghost.transform.right = new Vector3(_ghost._lastPosition.x - _ghost.transform.position.x, 0, 0f); ;
+            _ghost.transform.position = Vector3.MoveTowards(_ghost.transform.position, _lastposition, movedistance);
 
-        Debug.Log(_lastposition);
+        _ghost.transform.right = new Vector3(_lastposition.x - _ghost.transform.position.x, 0, 0f); ;
+
 
     }
 
-
-    private void IsFaceRight()
+    IEnumerator Search()
     {
-        if (_ghost.transform.position.x - _ghost._lastPosition.x < 0)
-        {
-            _isFaceRignt= true;
+        float wait = 1f;
+        while (wait < 1)
+        { 
+            yield return null;
+            wait -= Time.deltaTime;
         }
-        else
-        {
-            _isFaceRignt = false;
-        }
+
+        _ghost.setMoveRoom(false);
     }
 
 }

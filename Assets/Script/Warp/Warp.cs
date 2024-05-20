@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract
-    class Warp : MonoBehaviour, IWarpable
+    class Warp : MonoBehaviour, IWarpable , ISearchObejctAI
 {
     [SerializeField]
     private Warp warp;
@@ -18,6 +18,8 @@ public abstract
 
     [field:SerializeField]
     public Transform Location { get; protected set;}
+
+    public Transform position => transform;
 
     protected virtual void Awake()
     {

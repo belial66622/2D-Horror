@@ -19,6 +19,9 @@ public class Ghost : MonoBehaviour, IWarpTo
     Vector3 _playerPosition;
     public Vector3 _lastPosition { get; private set; }
 
+    [field:SerializeField]
+    public LayerMask DoorLocation{get; private set;}
+
     bool _canSeePlayer;
 
     [SerializeField] GameObject _player;
@@ -79,7 +82,7 @@ public class Ghost : MonoBehaviour, IWarpTo
         Func<bool> HasNoTarget() => () => !_canSeePlayer;
         Func<bool> MoveRoom() => () => _moveroom;
         Func<bool> BackToPatrol() => () => !_moveroom;
-        Func<bool> PatrolSearch() => () => !_canSeePlayer && _search&& !_moveroom;
+        Func<bool> PatrolSearch() => () => !_canSeePlayer && _search && !_moveroom;
     }
 
     public void IsFaceRight(bool face)
@@ -124,7 +127,7 @@ public class Ghost : MonoBehaviour, IWarpTo
         _moveroom = false;
     }
 
-    public void search(bool condition)
+    public void Search(bool condition)
     { 
     _search= condition;
     }

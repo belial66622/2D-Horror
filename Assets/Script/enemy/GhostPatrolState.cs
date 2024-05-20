@@ -30,13 +30,15 @@ public class GhostPatrolState : IState
     {
         _speed = _maxSpeed;
         patrol = _ghost.StartCoroutine(Count());
+
+        GameManager.Instance.Chased(0);
     }
 
     public void OnExit()
     {
         _ghost.StopCoroutine(patrol);
         _ghost.GetLocation();
-        _ghost.search(false);
+        _ghost.Search(false);
     }
 
     public void Tick()
