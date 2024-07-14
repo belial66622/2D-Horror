@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public abstract
@@ -42,5 +43,10 @@ public abstract
         OtherPointStatus = warp.GetComponent<IWarpable>().status;
 
         return OtherPointStatus;
+    }
+
+    public virtual void OpenStatus()
+    {
+        status = WarpStatus.Open;
     }
 }

@@ -1,4 +1,4 @@
-using GameHorror.InputSystem;
+ using GameHorror.InputSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
