@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : Warp, IInteractable
 {
     const string AIPass = "ByPassLock";
-
+    public UnityEvent afterOpen;
+    public UnityEvent afterEnter;
     public void CancelInteraction()
     {
 
@@ -71,6 +73,7 @@ public class Door : Warp, IInteractable
             {
                 status = WarpStatus.Open;
                 EventContainer.Instance.DialogueEvent("Penghalang Sudah dibuka");
+                afterOpen?.Invoke();
             }
         }
 
@@ -79,6 +82,7 @@ public class Door : Warp, IInteractable
             if (character.TryGetComponent<IWarpTo>(out IWarpTo warpto))
             {
                 WarpingTO(warpto);
+                afterEnter?.Invoke();
             }
         }
     }

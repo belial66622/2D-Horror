@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Item : MonoBehaviour, IItemDes , ISearchItem
 {
     #region Variable
 
-    private Coroutine _searcing = null; 
+    private Coroutine _searcing = null;
+
+    public UnityEvent AfterItemGet;
 
     #endregion
 
@@ -89,6 +92,7 @@ public class Item : MonoBehaviour, IItemDes , ISearchItem
                 // 0 digunakan untuk menghilangkan search pada bar. digunakan untuk mengatur waktu menjadi 0
                 EventContainer.Instance.SearchBarEvent(0);
                 HasItem= false;
+                AfterItemGet?.Invoke();
             }
         }
     }

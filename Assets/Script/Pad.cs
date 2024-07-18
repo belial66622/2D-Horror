@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pad : MonoBehaviour, IInteractable
 {
@@ -8,13 +9,14 @@ public class Pad : MonoBehaviour, IInteractable
     [SerializeField] string password;
     [SerializeField] Puzzle puzzle;
 
+    public UnityEvent AfterPuzzleClear;
     public void CancelInteraction()
     {
     }
 
     public void interaction(object obj = null)
     {
-        puzzle.SetPad(password, door);
+        puzzle.SetPad(password, door,this);
     }
 
     // Start is called before the first frame update

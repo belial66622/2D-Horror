@@ -43,7 +43,11 @@ public class RoomManager : MonoBehaviour
         {
             if (room.GetChild(i).TryGetComponent<SpriteRenderer>(out SpriteRenderer image))
             {
-                image.enabled = true;
+                if (image.gameObject.TryGetComponent<NoRender>(out _))
+                {
+                    continue;
+                }
+                    image.enabled = true;
             }
         }
     }

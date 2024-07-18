@@ -19,16 +19,19 @@ public class Puzzle : MonoBehaviour
     [SerializeField]
     string doorUnlocked;
 
+    Pad pad;
+
     public void add(string number)
     {
         current += number;
         Password.SetText(current);
     }
 
-    public void SetPad(string password, Door door)
+    public void SetPad(string password, Door door,Pad pad)
     {
         pass = password;
         Lockeddoor = door;
+        this.pad = pad;
         this.gameObject.SetActive(true);
     }
 
@@ -52,6 +55,7 @@ public class Puzzle : MonoBehaviour
         else
         {
             EventContainer.Instance.DialogueEvent(passwordWrong);
+            this.pad.AfterPuzzleClear?.Invoke();
         }
 
         current = "";

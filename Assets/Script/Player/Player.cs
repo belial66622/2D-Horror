@@ -26,6 +26,9 @@ public class Player : MonoBehaviour , IWarpTo
     private float stamina;
 
     [SerializeField]
+    private AnimationControl animcontrol;
+
+    [SerializeField]
     LayerMask obstacle;
 
     bool running = false;
@@ -112,13 +115,16 @@ public class Player : MonoBehaviour , IWarpTo
         gameInput.StartMovement();
     }
 
-   
+
     private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalize();
 
-        if (inputVector == Vector2.zero) return;
+        if (inputVector == Vector2.zero) {
 
+            animcontrol.SetSpeed(0);
+            return;
+    }
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
         
         float movedistance;
@@ -131,10 +137,12 @@ public class Player : MonoBehaviour , IWarpTo
             _delayStamina = true;
             addStamina = false; 
             _delayStaminaCount = delayStaminaDefaultCount;
+            animcontrol.SetSpeed(6);
         }
         else
         {
             movedistance = Time.deltaTime * _speed;
+            animcontrol.SetSpeed(2);
         }
 
         float playerHeight = 1.0f;
@@ -147,10 +155,17 @@ public class Player : MonoBehaviour , IWarpTo
             transform.position += moveDir * movedistance;
         }
 
-        if (inputVector.x > 0)
-        {
-            transform.right = moveDir;
-        }
+           // transform.right = moveDir;
+            if (inputVector.x > 0)
+            {
+                animcontrol.flip(false);
+            }
+
+            else
+            { 
+                animcontrol.flip(true);
+            }
+
 
     }
 

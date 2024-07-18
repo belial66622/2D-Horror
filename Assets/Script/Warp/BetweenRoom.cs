@@ -8,6 +8,7 @@ public class BetweenRoom : Warp
 
     protected override void Awake()
     {
+        if (!gameObject.activeInHierarchy) return;
         _room = transform.parent.GetComponent<Room>();
         GetComponentInParent<Room>().AddWarpLocation(this);
     }

@@ -24,6 +24,7 @@ public abstract
 
     protected virtual void Awake()
     {
+        if(!gameObject.activeInHierarchy)return;
         Location= transform;
         _room = transform.parent.GetComponent<Room>();
         GetComponentInParent<Room>().AddWarpLocation(this);
