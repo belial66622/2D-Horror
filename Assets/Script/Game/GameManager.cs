@@ -1,3 +1,4 @@
+using Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject Pause;
 
+    [SerializeField]
+    string Music;
+
     public int State { get; private set; } = 0;
 
     private void Awake()
@@ -35,6 +39,11 @@ public class GameManager : MonoBehaviour
         UnpauseGame();
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayBGM(Music);
+    }
+
     public Transform getPlayer()
     {
         return player;
@@ -44,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == 0 && state >0)
         {
+            AudioManager.Instance.PlaySFX("Chase");
             animator.Play("Go");
         }
 

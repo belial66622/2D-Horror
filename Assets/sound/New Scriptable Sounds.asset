@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990b4f234a5f848459f02d1c5736311b, type: 3}
+  m_Name: New Scriptable Sounds
+  m_EditorClassIdentifier: 
+  _mainMenuBGM: 
+  _sounds:
+  - _name: Stage0
+    _audioClip: {fileID: 8300000, guid: 3e7f00af6e3b97145b0fe3e36ef57250, type: 3}
+    _isBGM: 1
+    _audioMixerGroup: {fileID: 32456666826917671, guid: 30b32898cb8724949b48f51574b456bf, type: 2}
+  - _name: Stage1
+    _audioClip: {fileID: 8300000, guid: f6a08ebff11c8524faf528886f6cb24a, type: 3}
+    _isBGM: 1
+    _audioMixerGroup: {fileID: 32456666826917671, guid: 30b32898cb8724949b48f51574b456bf, type: 2}
+  - _name: Stage3
+    _audioClip: {fileID: 8300000, guid: 490614902f1bfec419045b5669f3c9d3, type: 3}
+    _isBGM: 1
+    _audioMixerGroup: {fileID: 32456666826917671, guid: 30b32898cb8724949b48f51574b456bf, type: 2}
+  - _name: Chase
+    _audioClip: {fileID: 8300000, guid: 3e7f00af6e3b97145b0fe3e36ef57250, type: 3}
+    _isBGM: 0
+    _audioMixerGroup: {fileID: 32456666826917671, guid: 30b32898cb8724949b48f51574b456bf, type: 2}

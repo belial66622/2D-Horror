@@ -1710,6 +1710,7 @@ MonoBehaviour:
   animator: {fileID: 51807365}
   chased: {fileID: 1462647376}
   Pause: {fileID: 1030944475}
+  Music: Stage0
 --- !u!1 &577981594
 GameObject:
   m_ObjectHideFlags: 0
