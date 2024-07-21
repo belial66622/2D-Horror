@@ -8,6 +8,7 @@ public class Door : Warp, IInteractable
     const string AIPass = "ByPassLock";
     public UnityEvent afterOpen;
     public UnityEvent afterEnter;
+
     public void CancelInteraction()
     {
 

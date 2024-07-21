@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public abstract
-    class Warp : MonoBehaviour, IWarpable , ISearchObejctAI
+    class Warp : MonoBehaviour, IWarpable, ISearchObejctAI
 {
     [SerializeField]
     private Warp warp;
@@ -15,17 +15,18 @@ public abstract
     [field: SerializeField]
     public string keyitem { get; protected set; }
 
-    public Room _room{get; protected set;}
+    public Room _room { get; protected set; }
 
-    [field:SerializeField]
-    public Transform Location { get; protected set;}
+    [field: SerializeField]
+    public Transform Location { get; protected set; }
 
     public Transform position => transform;
 
+    [SerializeField] protected bool enable = false;
     protected virtual void Awake()
     {
-        if(!gameObject.activeInHierarchy)return;
-        Location= transform;
+        if (!gameObject.activeInHierarchy) return;
+        Location = transform;
         _room = transform.parent.GetComponent<Room>();
         GetComponentInParent<Room>().AddWarpLocation(this);
     }
@@ -33,8 +34,11 @@ public abstract
     protected virtual void WarpingTO(IWarpTo warpto)
     {
         warpto.WarpTo(warp);
-        if(warpto.IsPlayer)
-        _room.ChangeRoom(warp.transform.parent);
+        if (warpto.IsPlayer)
+            if (!enable)
+            {         
+                _room.ChangeRoom(warp.transform.parent);
+            } 
     }
 
     protected WarpStatus GetOtherPoint()
