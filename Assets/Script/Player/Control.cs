@@ -26,20 +26,22 @@ public class Control : MonoBehaviour
         playerinput.InGame.Run.performed += Run_performed;
 
         playerinput.InGame.Run.canceled += Run_canceled;
+
+        playerinput.InGame.Pause.performed += pause;           ;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnDestroy()
     {
-        
-    }
+        playerinput.InGame.Interact.performed -= Interact_performed;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        playerinput.InGame.Interact.canceled -= Interact_canceled;
 
+        playerinput.InGame.Run.performed -= Run_performed;
+
+        playerinput.InGame.Run.canceled -= Run_canceled;
+
+        playerinput.InGame.Pause.performed -= pause;
+    }
 
     public void StopMovement()
     { 
@@ -84,6 +86,11 @@ public class Control : MonoBehaviour
         else return 0;
     }
 
+
+    void pause(InputAction.CallbackContext obj)
+    {
+        GameManager.Instance.PauseGame();
+    }
 
     private void Run_performed(InputAction.CallbackContext obj)
     {

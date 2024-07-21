@@ -64,6 +64,15 @@ namespace GameHorror.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""02df87a7-ab10-45d5-869e-6569f70ed499"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +163,17 @@ namespace GameHorror.InputSystem
                     ""action"": ""ItemChoose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8b30a7b-98ba-424b-a03d-4d61f7048b8a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -178,6 +198,7 @@ namespace GameHorror.InputSystem
             m_InGame_Interact = m_InGame.FindAction("Interact", throwIfNotFound: true);
             m_InGame_Run = m_InGame.FindAction("Run", throwIfNotFound: true);
             m_InGame_ItemChoose = m_InGame.FindAction("ItemChoose", throwIfNotFound: true);
+            m_InGame_Pause = m_InGame.FindAction("Pause", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -243,6 +264,7 @@ namespace GameHorror.InputSystem
         private readonly InputAction m_InGame_Interact;
         private readonly InputAction m_InGame_Run;
         private readonly InputAction m_InGame_ItemChoose;
+        private readonly InputAction m_InGame_Pause;
         public struct InGameActions
         {
             private @HorrorInput m_Wrapper;
@@ -251,6 +273,7 @@ namespace GameHorror.InputSystem
             public InputAction @Interact => m_Wrapper.m_InGame_Interact;
             public InputAction @Run => m_Wrapper.m_InGame_Run;
             public InputAction @ItemChoose => m_Wrapper.m_InGame_ItemChoose;
+            public InputAction @Pause => m_Wrapper.m_InGame_Pause;
             public InputActionMap Get() { return m_Wrapper.m_InGame; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -272,6 +295,9 @@ namespace GameHorror.InputSystem
                 @ItemChoose.started += instance.OnItemChoose;
                 @ItemChoose.performed += instance.OnItemChoose;
                 @ItemChoose.canceled += instance.OnItemChoose;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IInGameActions instance)
@@ -288,6 +314,9 @@ namespace GameHorror.InputSystem
                 @ItemChoose.started -= instance.OnItemChoose;
                 @ItemChoose.performed -= instance.OnItemChoose;
                 @ItemChoose.canceled -= instance.OnItemChoose;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IInGameActions instance)
@@ -320,6 +349,7 @@ namespace GameHorror.InputSystem
             void OnInteract(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
             void OnItemChoose(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }

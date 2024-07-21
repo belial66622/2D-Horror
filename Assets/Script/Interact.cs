@@ -19,20 +19,27 @@ public class Interact
 
     public void CheckCollider()
     {
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        List<Collider2D> results = new List<Collider2D>();
-        if (_collider.OverlapCollider(filter, results) > 0)
+        try
         {
-            foreach (Collider2D col in results)
+            ContactFilter2D filter = new ContactFilter2D().NoFilter();
+            List<Collider2D> results = new List<Collider2D>();
+            if (_collider.OverlapCollider(filter, results) > 0)
             {
-                if (col.TryGetComponent<IInteractable>(out IInteractable interact))
+                foreach (Collider2D col in results)
                 {
-                    interaction = interact;
-                    interact.interaction(_self);
-                    coroutine = _mono.StartCoroutine(CheckColliderEverytick());
-                    break;
+                    if (col.TryGetComponent<IInteractable>(out IInteractable interact))
+                    {
+                        interaction = interact;
+                        interact.interaction(_self);
+                        coroutine = _mono.StartCoroutine(CheckColliderEverytick());
+                        break;
+                    }
                 }
             }
+        }
+        catch
+        {
+            Debug.Log("null collider");
         }
     }
 
@@ -76,19 +83,26 @@ public class Interact
 
     public void CancelInteraction()
     {
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        List<Collider2D> results = new List<Collider2D>();
-        if (_collider.OverlapCollider(filter, results) > 0)
+        try
         {
-            foreach (Collider2D col in results)
+            ContactFilter2D filter = new ContactFilter2D().NoFilter();
+            List<Collider2D> results = new List<Collider2D>();
+            if (_collider.OverlapCollider(filter, results) > 0)
             {
-                if (col.TryGetComponent<IInteractable>(out IInteractable interact))
+                foreach (Collider2D col in results)
                 {
-                    interact.CancelInteraction();
-                    _mono.StopCoroutine(coroutine);
-                    break;
+                    if (col.TryGetComponent<IInteractable>(out IInteractable interact))
+                    {
+                        interact.CancelInteraction();
+                        _mono.StopCoroutine(coroutine);
+                        break;
+                    }
                 }
             }
+        }
+        catch
+        { 
+            Debug.Log("error");
         }
     }
 }

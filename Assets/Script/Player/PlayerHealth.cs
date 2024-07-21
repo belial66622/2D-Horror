@@ -8,5 +8,11 @@ public class PlayerHealth : Health
     {
         base.ChangeHealth(amount);
         EventContainer.Instance.HealthUIEvent(CurrentHealth / MaxHealth);
+
+        if (CurrentHealth <= 0)
+        {
+            GameManager.Instance.PauseGame(false);
+            EventContainer.Instance.GameOverEvent();
+        }
     }
 }

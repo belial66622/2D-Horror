@@ -6,6 +6,7 @@ public class Health : MonoBehaviour, IHealth
 {
     public float CurrentHealth { get; private set; }
 
+    [field:SerializeField]
     public float MaxHealth { get; private set; } = 10;
 
     private bool isdead = false;

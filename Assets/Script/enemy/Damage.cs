@@ -32,7 +32,6 @@ public class Damage : MonoBehaviour
                     damagestart = true;
                     Debug.Log("damage");
                     StartCoroutine(TakeHealth(health));
-
                 }
             }
         }
@@ -42,12 +41,10 @@ public class Damage : MonoBehaviour
     {
         if (collision.TryGetComponent<IHealth>(out IHealth health))
         {
-            GiveDamage(health, _dmg, out IHealth hp);
-            if (hp == health)
-            {
+
                 damagestart = false;
                 StopAllCoroutines();
-            }
+
 
         }
     }

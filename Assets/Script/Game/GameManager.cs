@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     GameObject chased;
+
+    [SerializeField]
+    GameObject Pause;
+
     public int State { get; private set; } = 0;
 
     private void Awake()
@@ -28,18 +32,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        UnpauseGame();
     }
 
     public Transform getPlayer()
@@ -67,4 +60,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PauseGame(bool cond = true)
+    {
+        Time.timeScale = 0;
+        Pause.SetActive(cond);
+    }
+
+
+
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+        Pause.SetActive(false);
+    }
 }

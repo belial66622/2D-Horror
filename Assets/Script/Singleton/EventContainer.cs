@@ -33,6 +33,7 @@ public class EventContainer : MonoBehaviour
 
     public Action<float> HealthUIListener;
 
+    public Action GameOverListener;
     public void ChoosenItemEvent(ItemIdentification item)
     { 
         ChoosenItemListener?.Invoke(item);
@@ -61,5 +62,10 @@ public class EventContainer : MonoBehaviour
     public void HealthUIEvent(float amount)
     {
         HealthUIListener?.Invoke(amount);
+    }
+
+    public void GameOverEvent()
+    {
+        GameOverListener?.Invoke();
     }
 }
