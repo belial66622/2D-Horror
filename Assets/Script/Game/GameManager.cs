@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Animator animator;
 
+    [SerializeField]
+    GameObject chased;
     public int State { get; private set; } = 0;
 
     private void Awake()
@@ -54,14 +56,14 @@ public class GameManager : MonoBehaviour
 
         State = state;
 
-        if (State == 1)
+        if (State == 2)
         {
-            //tampilkan UI putih;
+            chased.SetActive(true);
         }
 
         else
-        { 
-            //tampilkan ui dikejar
+        {
+            chased.SetActive(false);
         }
     }
 

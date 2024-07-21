@@ -13,4 +13,14 @@ public class LevelComplete : MonoBehaviour
     {
         PlayerPrefs.SetInt("Level3", 1);
     }
+
+    public void pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+    }
 }
